@@ -16,10 +16,13 @@ const fiveDayFour = document.querySelector('.four-of-five')
 
 const fiveDayArr = [fiveDayZero, fiveDayOne, fiveDayTwo, fiveDayThree, fiveDayFour]
 
-const fiveDayTemp = document.querySelector('.five-day-temp')
+const fiveDayTempMin = document.querySelector('.five-low')
+const fiveDayTempMax = document.querySelector('.five-high')
 const fiveDayIcon = document.querySelector('.five-day-icon')
 const fiveDayDate = document.querySelector('.five-day-date')
 const currentTime = document.querySelector('.time-oclock')
+
+
 
 var today = dayjs();
 currentTime.innerHTML = today.format('h:mm a');
@@ -111,6 +114,7 @@ function fetchApi(cityInput) {
         if (data.list[i].dt_txt.substring(11, 13) == "12"){
             handleMiniCard(fiveDayArr[index], data.list[i]);
             index ++
+            i++
         }
     }
     // handleMiniCard(fiveDayZero, data.list[1])
@@ -122,8 +126,8 @@ function fetchApi(cityInput) {
   }
 
   function handleMiniCard(cardNumber, data){
-    cardNumber.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
-    cardNumber.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
+    cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
+    cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
     
     handleFiveDayIcon(data)
   }
@@ -148,16 +152,16 @@ function fetchApi(cityInput) {
 
 
 function handleFiveDayIcon(data) {
-    if(data.weather[0].main === 'Clouds'){
+    if(data.weather[0].main == 'Clouds'){
         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/cloudy.svg" alt="">`;
 
-    } else if(data.weather[0].main === 'Rain'){
+    } else if(data.weather[0].main == 'Rain'){
         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/rainy.svg" alt="">`;
             
-    } else if(data.weather[0].main === 'clear'){
+    } else if(data.weather[0].main == 'clear'){
         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
         
-    } else if(data.weather[0].main === 'snow'){
+    } else if(data.weather[0].main == 'snow'){
         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/snow.svg" alt="">`;
     
 }
