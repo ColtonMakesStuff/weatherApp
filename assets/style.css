@@ -19,7 +19,7 @@ body {
 /* basic card structure */
 .card{
     width: 90%;
-    max-width: 550px; 
+    max-width: 650px; 
     background-color: #9c9aff;
     color: #fff; 
     margin-top: 150px auto 0;
@@ -91,6 +91,7 @@ margin-left: 10px;
     margin-left: 0%;
     margin-bottom: 15px;
     width: 100%;
+    font-size: x-large;
    
     /* border-radius: 20px; */
     background-color: transparent;
@@ -103,7 +104,7 @@ margin-left: 10px;
 }
 .time-oclock p{
     margin-left: 0;
-font-size: x-large;
+
 }
 .prev-search img {
     height: 20px;
@@ -223,17 +224,17 @@ font-size: 18px;
 }
 .column p {
     margin-bottom: 7px;
-    font-size: large;
+    font-size: larger;
 }
 .temps {
     margin-left: 8px;
 }
 
-.temp-high{
+.column .temp-high p{
     margin-top: 9px;
     font-size: medium;
 }
-.temp-low {
+.column .temp-low p{
     margin-top: 9px;
     font-size: small;
 }
@@ -246,4 +247,38 @@ font-size: 18px;
 }
 .the-wind{
     margin-top: 30px;
+}
+
+/* five day css */
+.five-day-icon img {
+    width: 85px;
+    height: 70px;
+}
+.five-day-card{
+    background-color: #8386c4;
+    width: 95px;
+    height: 140px;
+    border-radius: 12px;
+}
+.five-day-container{
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly; 
+}
+.five-day-date{
+    font-size: large;
+    margin-top: 5px;
+}
+.five-day-temp{
+    position: absolute;
+    
+    transform: translate(115%, -20%); 
+    font-size: x-large;
+}
+
+.five-low{
+    transform: translate(200%, 105%); 
+    font-size: medium;
 }
