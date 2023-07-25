@@ -115,8 +115,8 @@ function fetchApi(cityInput) {
         if (data.list[i].dt_txt.substring(11, 13) == "12"){ 
             console.log("success")
             console.log(data.list[i].dt_txt)
-            let cardNumber = fiveDayArr[index]
-            handleMiniCard(cardNumber, data.list[i]);
+            // let cardNumber = fiveDayArr[index]
+            handleMiniCard(index, data.list[i]);
             index  ++
         }
     }
@@ -128,12 +128,16 @@ function fetchApi(cityInput) {
 
   }
 
-   function handleMiniCard(cardNumber, data){
-    //  cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
-    //  cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
-    
+   function handleMiniCard(index, data){
+  console.log(index)
+  console.log(data)
+  
+    // fiveDayArr[cardNumber].fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
+    // fiveDayArr[cardNumber].fiveDayTempMin.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
+    console.log("successinmini")
     //  handleFiveDayIcon(data)
-    console.log(cardNumber)
+    
+    
    }
 
   function handleIcon(data) {
