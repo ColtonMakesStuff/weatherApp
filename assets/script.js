@@ -107,14 +107,17 @@ function fetchApi(cityInput) {
 
 
   function handleFiveDayApiData(data){
-    console.log(data)
+    console.log(data.list)
+    console.log(data.list[0].dt_txt)
     let index = 0
     for (let i=0; i < data.list.length; i++){
-        console.log(data.list[i].dt_txt.substring(11, 13))
-        if (data.list[i].dt_txt.substring(11, 13) == "12"){
-            handleMiniCard(fiveDayArr[index], data.list[i]);
-            index ++
-            i++
+        
+        if (data.list[i].dt_txt.substring(11, 13) == "12"){ 
+            console.log("success")
+            console.log(data.list[i].dt_txt)
+            let cardNumber = fiveDayArr[index]
+            handleMiniCard(cardNumber, data.list[i]);
+            index  ++
         }
     }
     // handleMiniCard(fiveDayZero, data.list[1])
@@ -125,12 +128,13 @@ function fetchApi(cityInput) {
 
   }
 
-  function handleMiniCard(cardNumber, data){
-    cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
-    cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
+   function handleMiniCard(cardNumber, data){
+    //  cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
+    //  cardNumber.fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
     
-    handleFiveDayIcon(data)
-  }
+    //  handleFiveDayIcon(data)
+    console.log(cardNumber)
+   }
 
   function handleIcon(data) {
     if(data.weather[0].main === 'Clouds'){
@@ -151,22 +155,22 @@ function fetchApi(cityInput) {
 }
 
 
-function handleFiveDayIcon(data) {
-    if(data.weather[0].main == 'Clouds'){
-        cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/cloudy.svg" alt="">`;
+// function handleFiveDayIcon(data) {
+//     if(data.weather[0].main == 'Clouds'){
+//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/cloudy.svg" alt="">`;
 
-    } else if(data.weather[0].main == 'Rain'){
-        cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/rainy.svg" alt="">`;
+//     } else if(data.weather[0].main == 'Rain'){
+//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/rainy.svg" alt="">`;
             
-    } else if(data.weather[0].main == 'clear'){
-        cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
+//     } else if(data.weather[0].main == 'clear'){
+//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
         
-    } else if(data.weather[0].main == 'snow'){
-        cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/snow.svg" alt="">`;
+//     } else if(data.weather[0].main == 'snow'){
+//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/snow.svg" alt="">`;
     
-}
+// }
    
-}
+// }
 
 
 function handlePreviousSearch() {
