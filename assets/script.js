@@ -74,19 +74,44 @@ const fiveDayDate = document.querySelector('.five-day-date')
 const currentTime = document.querySelector('#time')
 const currentday = document.querySelector('#day')
 
-function addToHistory(cityInput) {
- for (){   const prevSearchDiv = document.createElement('div');
-prevSearchDiv.classList.add('prev-search');
+const storedUserData = localStorage.getItem('userData')
+let userDataArr = JSON.parse(storedUserData);
 
-const pElement = document.createElement('p');
-pElement.textContent = cityInput;
+//~~~~~~~~~~~~~need to add search history as a button input~~~~~~~~~~~~~
 
-prevSearchDiv.appendChild(pElement);
+window.onload = function() {
+    addToHistory()
+  };
 
-// Append prevSearchDiv to a parent element in the DOM
-const previousBox = document.querySelector('.previous-box');
-previousBox.appendChild(prevSearchDiv);}
-}
+  function addToHistory() {
+    if (userDataArr === null) {
+        userDataArr = [];
+      }
+    // Get the stored userData from localStorage
+        const previousBox = document.querySelector('.idk');
+        previousBox.innerHTML= ""
+        if (userDataArr.length > 20) {
+            userDataArr.shift();
+          }
+      
+  console.log(userDataArr)
+  var index = 0
+      for (let i = 0; i<userDataArr.length; i++) {
+        const prevSearchDiv = document.createElement('div');
+        prevSearchDiv.classList.add('prev-search');
+  
+        const pElement = document.createElement('p');
+        pElement.textContent = userDataArr[index];
+  
+        prevSearchDiv.appendChild(pElement);
+  
+        // Append prevSearchDiv to a parent element in the DOM
+        
+        previousBox.appendChild(prevSearchDiv);
+        index ++
+      }
+    }
+  
 
 var today = dayjs();
 currentTime.innerHTML = today.format('h:mm a');
@@ -100,11 +125,7 @@ console.log(today.format('h:mm a'));
 function refresh(){
     location.reload();
 }
-// window.onload = function() {
-//     let cityInput = "new york"
-//     fetchApi(cityInput)
-    
-//   };
+ 
   
 search.addEventListener("keypress", function(event) {
     if (event.key === "Enter") {
@@ -118,8 +139,9 @@ function logCity() {
     console.log(cityInput)
     
     fetchApi(cityInput) 
-    addToHistory(cityInput)
- document.querySelector(".search").reset();
+    document.querySelector(".search").reset();
+
+ 
 
 }
 
@@ -128,18 +150,31 @@ function logCity() {
 // Make the API request using the constructed URL
 function fetchApi(cityInput) {
   let cityName = cityInput;
+  
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
   fetch(apiUrl)
     .then((response) => {
       return response.json();
     })
+   // if (data.cod == '404' || data.cod == '400'){ say that page was abjucted by aliens please try again }
     .then((data) => {
+        if (data.cod !== '404' && data.cod !== '400'){
+            if (userDataArr === null) {
+                userDataArr = [];
+              }
+            let userData = cityInput
+                userDataArr.push(userData); // Add the new object to the array
+              localStorage.setItem('userData', JSON.stringify(userDataArr)); // Store the array in local storage
+             console.log(userDataArr);
+            }
       console.log(data);
       handleData(data);
       handleIcon(data);
       fetchFiveDayApi();
+      addToHistory() 
     });
+   
 }
 
 
