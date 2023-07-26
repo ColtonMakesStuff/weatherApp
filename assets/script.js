@@ -59,7 +59,7 @@ const windTwo = document.querySelector('#wind-two')
 const windThree = document.querySelector('#wind-three')
 const windFour = document.querySelector('#wind-four')
 
-fiveDayWindArr = [windZero, windOne, windTwo, windThree, windFour]
+var fiveDayWindArr = [windZero, windOne, windTwo, windThree, windFour]
 
 const humidZero = document.querySelector('#humid-zero')
 const humidOne = document.querySelector('#humid-one')
@@ -67,8 +67,9 @@ const humidTwo = document.querySelector('#humid-two')
 const humidThree = document.querySelector('#humid-three')
 const humidFour = document.querySelector('#humid-four')
 
-fiveDayHumidArr = [humidZero, humidOne, humidTwo, humidThree, humidFour]
+var fiveDayHumidArr = [humidZero, humidOne, humidTwo, humidThree, humidFour]
 
+const fiveDaySection =document.querySelector('.five-day-container')
 
 const fiveDayDate = document.querySelector('.five-day-date')
 const currentTime = document.querySelector('#time')
@@ -99,18 +100,32 @@ window.onload = function() {
       for (let i = 0; i<userDataArr.length; i++) {
         const prevSearchDiv = document.createElement('div');
         prevSearchDiv.classList.add('prev-search');
-  
+        prevSearchDiv.setAttribute('id', 'click-me');
+
         const pElement = document.createElement('p');
         pElement.textContent = userDataArr[index];
+        
   
+
         prevSearchDiv.appendChild(pElement);
   
         // Append prevSearchDiv to a parent element in the DOM
         
         previousBox.appendChild(prevSearchDiv);
+
+
+
         index ++
       }
     }
+const clickMe = document.querySelector('#click-me')
+
+    clickMe.addEventListener('click', function() {
+        console.log(event.target.textContent);
+        let citySearch = event.target.textContent
+        fetchApi(citySearch)
+         
+    });
   
 
 var today = dayjs();
@@ -134,7 +149,7 @@ search.addEventListener("keypress", function(event) {
     }
   });
 
-function logCity() {
+function logCity(cityInput) {
     var cityInput = document.querySelector('#city-input').value;
     console.log(cityInput)
     
@@ -145,7 +160,18 @@ function logCity() {
 
 }
 
-
+ function abducted() {
+    city.innerHTML = "Please try again";    
+    temp.innerHTML = "";
+    tempHigh.innerHTML = "warmer than expected";
+     tempLow.innerHTML = "not so bad";
+      theWind.innerHTML = "lightspeed"
+     weatherDescription.innerHTML = "THIS PAGE WAS ABDUCTED BY ALIENS!"
+     humid.innerHTML = "oddly moist"
+     weatherIcon.innerHTML = `<img class="weather-icon" src="./assets/images/icons/abducted.svg" alt="">`;
+    fiveDaySection.classList.add('hidden');
+    
+ }
 
 // Make the API request using the constructed URL
 function fetchApi(cityInput) {
@@ -157,8 +183,14 @@ function fetchApi(cityInput) {
     .then((response) => {
       return response.json();
     })
-   // if (data.cod == '404' || data.cod == '400'){ say that page was abjucted by aliens please try again }
+    
     .then((data) => {
+        if (data.cod == '404' || data.cod == '400'){ 
+    //  alert("say that page was abjucted by aliens please try again") 
+    abducted()
+    return;
+    }
+    fiveDaySection.classList.remove('hidden');
         if (data.cod !== '404' && data.cod !== '400'){
             if (userDataArr === null) {
                 userDataArr = [];

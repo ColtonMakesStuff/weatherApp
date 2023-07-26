@@ -253,6 +253,10 @@ font-size: 18px;
     margin-top: 30px;
 }
 
+.hidden {
+    visibility: hidden;
+  }
+
 /* five day css */
 .five-day-icon img {
     width: 85px;
