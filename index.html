@@ -14,24 +14,20 @@
         <div class="card previous-search-container">
             <div class="previous-box">
                 <!-- Previous Search Items -->
-                <div class="time-oclock">
+                <div class="time-oclock" id="day">
                     <p>12:30 PM</p>
                 </div>
-                <div class="prev-search pinned">
-                    <p>Sacramento</p>
-                    <img src="./assets/images/icons/rainy.svg" alt="" class="weather-icon">
+                <div class="time-oclock" id="time">
+                    <p>12:30 PM</p>
                 </div>
+              
                 <div class="prev-search pinned" onclick="refresh()">
                     <p>Mars</p>
                     <img src="./assets/images/icons/mars.svg" alt="" class="weather-icon">
                 </div>
-                <div class="prev-search pinned">
-                    <p>Jupitor</p>
-                    <img src="./assets/images/icons/snow.svg" alt="" class="weather-icon">
-                </div>
+               
                 <div class="prev-search">
                     <p>Mordor</p>
-                    <img src="./assets/images/icons/partly-cloudy.svg" alt="" class="weather-icon">
                 </div>
             </div>
         </div>
@@ -68,6 +64,7 @@
                 <div class="weather-icon-container">
                     <img class="weather-icon" src="./assets/images/icons/mars.svg" alt="" >
                 </div>
+            
                     <h1 class="temp">-80° f</h1>
                     <h2 class="city">Mars</h2>
                 </div>
@@ -86,7 +83,13 @@
                             </div>
                         </div>
                     </div>
-
+                    <div class="column">
+                        <p>Humidity</p>
+<div class="humid-container">
+                <div class="info"><img src="assets/images/icons/humid.svg" alt=""></div>
+                <p class="column" id="humid">0%</p>
+</div>
+            </div>
                     <!-- Info column 2 -->
                     <div class="info">
                         <div class="column">
@@ -103,33 +106,46 @@
                     
                 </div>
                 <div class="five-day-container">
-                    <div class="five-day-card four-of-five">
-                        <div class="five-day-date">tuesday</div>
-                        <div class="five-day-icon"><img src="./assets/images/icons/cloudy.svg" alt=""></div>
-                        <div class="five-day-temp five-high">69</div>
-                        <div class="five-day-temp five-low">45</div>
-                    </div><div class="five-day-card four-of-five">
-                        <div class="five-day-date">tuesday</div>
-                        <div class="five-day-icon"><img src="./assets/images/icons/cloudy.svg" alt=""></div>
-                        <div class="five-day-temp five-high">69</div>
-                        <div class="five-day-temp five-low">45</div>
-                    </div><div class="five-day-card four-of-five">
-                        <div class="five-day-date">tuesday</div>
-                        <div class="five-day-icon"><img src="./assets/images/icons/cloudy.svg" alt=""></div>
-                        <div class="five-day-temp five-high">69</div>
-                        <div class="five-day-temp five-low">45</div>
-                    </div><div class="five-day-card four-of-five">
-                        <div class="five-day-date">tuesday</div>
-                        <div class="five-day-icon"><img src="./assets/images/icons/cloudy.svg" alt=""></div>
-                        <div class="five-day-temp five-high">69</div>
-                        <div class="five-day-temp five-low">45</div>
+                    <div class="five-day-card zero-of-five">
+                        <div class="five-day-date" id="dotw-zero">Solis</div>
+                        <div class="five-day-icon"id='day-zero-icon'><img src="./assets/images/icons/martianDust.svg" alt=""></div>
+                        <div class="five-day-temp" id="five-high-zero">-89°F</div>
+                        <div class="five-day-temp five-low" id="five-low-zero"></div>
+                        <div class="five-day-wind"  id="wind-zero">wind: 60 mph</div>
+                        <div class="five-day-humid"  id="humid-zero">humidity: 0%</div>
                     </div>
-                        <div class="five-day-card four-of-five">
-                            <div class="five-day-date">tuesday</div>
-                            <div class="five-day-icon"><img src="./assets/images/icons/cloudy.svg" alt=""></div>
-                            <div class="five-day-temp five-high">69</div>
-                            <div class="five-day-temp five-low">45</div>
-                        </div>
+                    <div class="five-day-card one-of-five">
+                        <div class="five-day-date" id="dotw-one">Lunae</div>
+                        <div class="five-day-icon " id='day-one-icon'><img src="./assets/images/icons/martianDust.svg" alt=""></div>
+                        <div class="five-day-temp" id="five-high-one">-76°F</div>
+                        <div class="five-day-temp five-low" id="five-low-one"></div>
+                        <div class="five-day-wind"  id="wind-one">wind: 70 mph</div>
+                        <div class="five-day-humid"  id="humid-one">humidity: 0%</div>
+                    </div>
+                    <div class="five-day-card two-of-five">
+                        <div class="five-day-date" id="dotw-two">Martis</div>
+                        <div class="five-day-icon"id='day-two-icon'><img src="./assets/images/icons/martianDust.svg" alt=""></div>
+                        <div class="five-day-temp" id="five-high-two">-62°F</div>
+                        <div class="five-day-temp five-low" id="five-low-two"></div>
+                        <div class="five-day-wind"  id="wind-two">wind: 55 mph</div>
+                        <div class="five-day-humid"  id="humid-two">humidity: 0%</div>
+                    </div>
+                    <div class="five-day-card three-of-five">
+                        <div class="five-day-date" id="dotw-three">Mercurii</div>
+                        <div class="five-day-icon"id='day-three-icon'><img src="./assets/images/icons/martianDust.svg" alt=""></div>
+                        <div class="five-day-temp" id="five-high-three">-78°F</div>
+                        <div class="five-day-temp five-low" id="five-low-three"></div>
+                        <div class="five-day-wind"  id="wind-three">wind: 63 mph</div>
+                        <div class="five-day-humid"  id="humid-three">humidity: 0%</div>
+                    </div>
+                    <div class="five-day-card four-of-five">
+                        <div class="five-day-date" id="dotw-four">Jovis</div>
+                        <div class="five-day-icon"id='day-four-icon'><img src="./assets/images/icons/martianDust.svg" alt=""></div>
+                        <div class="five-day-temp" id="five-high-four">-97°F</div>
+                        <div class="five-day-temp five-low" id="five-low-four"></div>
+                        <div class="five-day-wind"  id="wind-four">wind: 67 mph</div>
+                        <div class="five-day-humid"  id="humid-four">humidity: 0%</div>
+                    </div>
                 </div>
             </div>
         </div>

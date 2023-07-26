@@ -19,7 +19,7 @@ body {
 /* basic card structure */
 .card{
     width: 90%;
-    max-width: 650px; 
+    max-width: 800px; 
     background-color: #9c9aff;
     color: #fff; 
     margin-top: 150px auto 0;
@@ -208,6 +208,10 @@ font-size: 18px;
     margin-top: 3px;
     margin-bottom: 20px;
     padding-bottom: 12px;
+    
+}
+.city{
+    font-size: xx-large;
 }
 .weather-description{
     margin-top: 30px;
@@ -256,8 +260,8 @@ font-size: 18px;
 }
 .five-day-card{
     background-color: #8386c4;
-    width: 95px;
-    height: 140px;
+    width: 130px;
+    height: 180px;
     border-radius: 12px;
 }
 .five-day-container{
@@ -274,11 +278,34 @@ font-size: 18px;
 .five-day-temp{
     position: absolute;
     
-    transform: translate(115%, -20%); 
+    transform: translate(20%, -20%); 
     font-size: x-large;
 }
 
 .five-low{
-    transform: translate(200%, 105%); 
+    transform: translate(220%, 10%); 
     font-size: medium;
+}
+.five-day-wind{
+    position: absolute;
+    
+    transform: translate(10%, 120%); 
+    font-size: large;
+}
+.five-day-humid{
+    position: absolute;
+    
+    transform: translate(10%, 240%); 
+    font-size: large;
+}
+.humid-container{
+    display: flex;
+   justify-content: center;
+}
+
+
+#humid {
+font-size: x-large;
+    margin-top: 28px;
+    margin-left: 4px;    
 }

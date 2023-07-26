@@ -7,6 +7,7 @@ const tempLow = document.querySelector(".temp-low");
 const tempHigh = document.querySelector(".temp-high");
 const weatherIcon = document.querySelector(".weather-icon-container");
 const weatherDescription = document.querySelector(".weather-description");
+const humid = document.querySelector('#humid')
 
 const fiveDayZero = document.querySelector('.zero-of-five')
 const fiveDayOne = document.querySelector('.one-of-five')
@@ -14,18 +15,82 @@ const fiveDayTwo = document.querySelector('.two-of-five')
 const fiveDayThree = document.querySelector('.three-of-five')
 const fiveDayFour = document.querySelector('.four-of-five')
 
-const fiveDayArr = [fiveDayZero, fiveDayOne, fiveDayTwo, fiveDayThree, fiveDayFour]
 
-const fiveDayTempMin = document.querySelector('.five-low')
-const fiveDayTempMax = document.querySelector('.five-high')
-const fiveDayIcon = document.querySelector('.five-day-icon')
+
+
+
+const dayZeroTempMin = document.querySelector('#five-low-zero')
+const dayOneTempMin = document.querySelector('#five-low-one')
+const dayTwoTempMin = document.querySelector('#five-low-two')
+const dayThreeTempMin = document.querySelector('#five-low-three')
+const dayFourTempMin = document.querySelector('#five-low-four')
+
+const fiveDayMinArr = [dayZeroTempMin, dayOneTempMin, dayTwoTempMin, dayThreeTempMin, dayFourTempMin]
+
+
+const dayZeroTempMax = document.querySelector('#five-high-zero')
+const dayOneTempMax = document.querySelector('#five-high-one')
+const dayTwoTempMax = document.querySelector('#five-high-two')
+const dayThreeTempMax = document.querySelector('#five-high-three')
+const dayFourTempMax = document.querySelector('#five-high-four')
+
+const fiveDayMaxArr = [dayZeroTempMax, dayOneTempMax, dayTwoTempMax, dayThreeTempMax, dayFourTempMax]
+
+
+const dayZeroIcon = document.querySelector('#day-zero-icon')
+const dayOneIcon = document.querySelector('#day-one-icon')
+const dayTwoIcon = document.querySelector('#day-two-icon')
+const dayThreeIcon = document.querySelector('#day-three-icon')
+const dayFourIcon = document.querySelector('#day-four-icon')
+
+const fiveDayIconArr = [dayZeroIcon, dayOneIcon, dayTwoIcon, dayThreeIcon, dayFourIcon]
+
+const dotwZero = document.querySelector('#dotw-zero')
+const dotwOne = document.querySelector('#dotw-one')
+const dotwTwo = document.querySelector('#dotw-two')
+const dotwThree = document.querySelector('#dotw-three')
+const dotwFour = document.querySelector('#dotw-four')
+
+dotwArr = [dotwZero, dotwOne, dotwTwo, dotwThree, dotwFour]
+
+const windZero = document.querySelector('#wind-zero')
+const windOne = document.querySelector('#wind-one')
+const windTwo = document.querySelector('#wind-two')
+const windThree = document.querySelector('#wind-three')
+const windFour = document.querySelector('#wind-four')
+
+fiveDayWindArr = [windZero, windOne, windTwo, windThree, windFour]
+
+const humidZero = document.querySelector('#humid-zero')
+const humidOne = document.querySelector('#humid-one')
+const humidTwo = document.querySelector('#humid-two')
+const humidThree = document.querySelector('#humid-three')
+const humidFour = document.querySelector('#humid-four')
+
+fiveDayHumidArr = [humidZero, humidOne, humidTwo, humidThree, humidFour]
+
+
 const fiveDayDate = document.querySelector('.five-day-date')
-const currentTime = document.querySelector('.time-oclock')
+const currentTime = document.querySelector('#time')
+const currentday = document.querySelector('#day')
 
+function addToHistory(cityInput) {
+ for (){   const prevSearchDiv = document.createElement('div');
+prevSearchDiv.classList.add('prev-search');
 
+const pElement = document.createElement('p');
+pElement.textContent = cityInput;
+
+prevSearchDiv.appendChild(pElement);
+
+// Append prevSearchDiv to a parent element in the DOM
+const previousBox = document.querySelector('.previous-box');
+previousBox.appendChild(prevSearchDiv);}
+}
 
 var today = dayjs();
 currentTime.innerHTML = today.format('h:mm a');
+currentday.innerHTML = today.format('dddd') + " " + today.format('M/D/YYYY'); 
 
 const apiKey = "3345d74a687b8041b547bb45348451f6";
 
@@ -53,7 +118,7 @@ function logCity() {
     console.log(cityInput)
     
     fetchApi(cityInput) 
-
+    addToHistory(cityInput)
  document.querySelector(".search").reset();
 
 }
@@ -63,7 +128,7 @@ function logCity() {
 // Make the API request using the constructed URL
 function fetchApi(cityInput) {
   let cityName = cityInput;
-  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`;
+  const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
   fetch(apiUrl)
     .then((response) => {
@@ -82,11 +147,12 @@ function fetchApi(cityInput) {
   function handleData(data){
    
     city.innerHTML = data.name
-    temp.innerHTML = Math.round((Math.round (data.main.temp))*(9/5)+32) + "°F";
-    tempHigh.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
-    tempLow.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
+    temp.innerHTML = Math.round((Math.round (data.main.temp))) + "°F";
+    tempHigh.innerHTML = Math.round((Math.round (data.main.temp_max))) + "°F";
+    tempLow.innerHTML = Math.round((Math.round (data.main.temp_min))) + "°F";
      theWind.innerHTML = Math.round(data.wind.speed/1.609344) + " m/h";
     weatherDescription.innerHTML = data.weather[0].main
+    humid.innerHTML = data.main.humidity + "%"
     long = data.coord.lon
     lati = data.coord.lat
   }
@@ -94,7 +160,7 @@ function fetchApi(cityInput) {
 
 
   function fetchFiveDayApi() {
-    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lati}&lon=${long}&appid=${apiKey}&units=metric`;
+    const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lati}&lon=${long}&appid=${apiKey}&units=imperial`;
   
     fetch(apiUrl)
       .then((response) => {
@@ -108,37 +174,55 @@ function fetchApi(cityInput) {
 
   function handleFiveDayApiData(data){
     console.log(data.list)
-    console.log(data.list[0].dt_txt)
     let index = 0
+    
     for (let i=0; i < data.list.length; i++){
         
-        if (data.list[i].dt_txt.substring(11, 13) == "12"){ 
-            console.log("success")
+        if (data.list[i].dt_txt.substring(11, 13) == "18"){ 
+           
             console.log(data.list[i].dt_txt)
-            // let cardNumber = fiveDayArr[index]
-            handleMiniCard(index, data.list[i]);
-            index  ++
+           
+           var timestamp = data.list[i].dt
+           var date = dayjs.unix(timestamp);
+           var dayOfWeek = date.format('dddd');
+    console.log(dayOfWeek)
+
+    dotwArr[index].innerHTML = dayOfWeek
+
+                fiveDayMaxArr[index].innerHTML = Math.round(data.list[i].main.temp_max)+ "°F/";
+                console.log(index)
+                fiveDayMinArr[index].innerHTML = Math.round(data.list[i].main.temp_min)+ "°F";
+                fiveDayWindArr[index].innerHTML = "wind: " + Math.round(data.list[i].wind.speed/1.609344) + "mph";
+                fiveDayHumidArr[index].innerHTML = "humidity: " + (data.list[i].main.humidity) + "%";
+
+                
+                
+                var weather = data.list[i].weather[0].main
+
+console.log(weather)
+fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
+
+                if (weather === 'Clouds'){
+                    fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/cloudy.svg" alt="">`;
+                    
+                } else if (weather === 'Rain'){
+                    fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/rainy.svg" alt="">`;
+                            
+                } else if (weather === 'clear'){
+                    fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
+                            
+                } else if (weather === 'snow'){
+                  fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/snow.svg" alt="">`;
+               }
+                
+                index ++;
+            
+           
         }
     }
-    // handleMiniCard(fiveDayZero, data.list[1])
-    // handleMiniCard(fiveDayOne, data)
-    // handleMiniCard(fiveDayTwo, data)
-    // handleMiniCard(fiveDayThree, data)
-    // handleMiniCard(fiveDayFour, data)
-
   }
 
-   function handleMiniCard(index, data){
-  console.log(index)
-  console.log(data)
-  
-    // fiveDayArr[cardNumber].fiveDayTempMax.innerHTML = Math.round((Math.round (data.main.temp_max))*(9/5)+32) + "°F";
-    // fiveDayArr[cardNumber].fiveDayTempMin.innerHTML = Math.round((Math.round (data.main.temp_min))*(9/5)+32) + "°F";
-    console.log("successinmini")
-    //  handleFiveDayIcon(data)
-    
-    
-   }
+
 
   function handleIcon(data) {
     if(data.weather[0].main === 'Clouds'){
@@ -159,22 +243,22 @@ function fetchApi(cityInput) {
 }
 
 
-// function handleFiveDayIcon(data) {
-//     if(data.weather[0].main == 'Clouds'){
-//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/cloudy.svg" alt="">`;
+//  function handleFiveDayIcon(index, data) {
+//      if(data.list[i].weather[0].main == 'Clouds'){
+//          fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/cloudy.svg" alt="">`;
 
-//     } else if(data.weather[0].main == 'Rain'){
-//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/rainy.svg" alt="">`;
+//      } else if(data.list[i].weather[0].main == 'Rain'){
+//         fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/rainy.svg" alt="">`;
             
-//     } else if(data.weather[0].main == 'clear'){
-//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
+//      } else if(data.list[i].weather[0].main == 'clear'){
+//         fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/sunny.svg" alt="">`;
         
-//     } else if(data.weather[0].main == 'snow'){
-//         cardNumber.fiveDayIcon.innerHTML = `<img src="./assets/images/icons/snow.svg" alt="">`;
+//      } else if(data.list[i].weather[0].main == 'snow'){
+//         fiveDayIconArr[index].innerHTML = `<img src="./assets/images/icons/snow.svg" alt="">`;
     
-// }
+//  }
    
-// }
+//  }
 
 
 function handlePreviousSearch() {
