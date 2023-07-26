@@ -163,8 +163,8 @@ function logCity(cityInput) {
  function abducted() {
     city.innerHTML = "Please try again";    
     temp.innerHTML = "";
-    tempHigh.innerHTML = "warmer than expected";
-     tempLow.innerHTML = "not so bad";
+    tempHigh.innerHTML = "";
+     tempLow.innerHTML = "kinda warm";
       theWind.innerHTML = "lightspeed"
      weatherDescription.innerHTML = "THIS PAGE WAS ABDUCTED BY ALIENS!"
      humid.innerHTML = "oddly moist"
