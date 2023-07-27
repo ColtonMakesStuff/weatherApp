@@ -78,7 +78,7 @@ const currentday = document.querySelector('#day')
 const storedUserData = localStorage.getItem('userData')
 let userDataArr = JSON.parse(storedUserData);
 
-//~~~~~~~~~~~~~need to add search history as a button input~~~~~~~~~~~~~
+
 
 window.onload = function() {
     addToHistory()
@@ -176,7 +176,7 @@ function logCity(cityInput) {
 // Make the API request using the constructed URL
 function fetchApi(cityInput) {
   let cityName = cityInput;
-  
+   
   const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=imperial`;
 
   fetch(apiUrl)
