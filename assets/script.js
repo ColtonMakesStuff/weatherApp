@@ -245,7 +245,7 @@ function fetchApi(cityInput) {
     
     for (let i=0; i < data.list.length; i++){
         
-        if (data.list[i].dt_txt.substring(11, 13) == "18"){ 
+        if (data.list[i].dt_txt.substring(11, 13) == "00"){ 
            
             console.log(data.list[i].dt_txt)
            
@@ -256,9 +256,9 @@ function fetchApi(cityInput) {
 
     dotwArr[index].innerHTML = dayOfWeek
 
-                fiveDayMaxArr[index].innerHTML = Math.round(data.list[i].main.temp_max)+ "°F/";
+                fiveDayMaxArr[index].innerHTML = Math.round(data.list[i].main.temp_max)+ "°F";
                 console.log(index)
-                fiveDayMinArr[index].innerHTML = Math.round(data.list[i].main.temp_min)+ "°F";
+                
                 fiveDayWindArr[index].innerHTML = "wind: " + Math.round(data.list[i].wind.speed/1.609344) + "mph";
                 fiveDayHumidArr[index].innerHTML = "humidity: " + (data.list[i].main.humidity) + "%";
 
